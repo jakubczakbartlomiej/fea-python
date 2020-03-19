@@ -1,6 +1,8 @@
 from fileOperations import loadInputFile, checkElementType
+from preprocessor.preprocessorTruss import runPreprocessorModule
 
 if __name__ == "__main__":
-    inputFile = loadInputFile()
-    checkElementType(inputFile)
-
+    inputFilename = loadInputFile()
+    elementType = checkElementType(inputFilename)
+    # PREPROCESSOR #
+    runPreprocessorModule(inputFilename, elementType)

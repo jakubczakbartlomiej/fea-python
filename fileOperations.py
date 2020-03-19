@@ -1,6 +1,7 @@
 import os
 
-#import preprocessor.preprocessorTruss
+# GLOBAL VARIABLES #
+EX = []
 
 def loadInputFile():
     os.system('cls')
@@ -12,8 +13,8 @@ def loadInputFile():
     userChoice = input("Which file would you like to use? (insert number and press ENTER): ")
     return testFilesList[int(userChoice)-1]
 
-def checkElementType(inputFile):
-    fileToCheck = open("testfiles/" + inputFile, 'r')
+def checkElementType(inputFilename):
+    fileToCheck = open("testfiles/" + inputFilename, 'r')
     checkLine = ""
     while(checkLine[0:2] != "ET"):
         checkLine = fileToCheck.readline()
@@ -22,5 +23,13 @@ def checkElementType(inputFile):
         print("\n***********************************************")
         print("File loaded successfully! Element type: LINK180")
         print("***********************************************\n")
+        return "LINK180"
     else:
         print("Error! Element type incorrect or not found!")
+
+def getCharPosition(givenString, char):
+    position = []
+    for n in range(len(givenString)):
+        if givenString[n] == char:
+            position.append(n)
+    return position
