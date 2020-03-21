@@ -1,7 +1,10 @@
 import os
 
 # GLOBAL VARIABLES #
-EX = []
+youngX = []
+poissonXY = []
+node = []
+####################
 
 def loadInputFile():
     os.system('cls')
