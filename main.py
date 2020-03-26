@@ -1,9 +1,14 @@
 from fileOperations import loadInputFile, checkInputFile
-from preprocessor.preprocessorTruss import runPreprocessorModule
+from preprocessor.gatherDataFromFile import runPreprocessorModule
+from solver.buildVectors import buildLoadVector
 
 if __name__ == "__main__":
     # PREPROCESSOR #
     inputFilename = loadInputFile()
     elementType, amount = checkInputFile(inputFilename)
-    runPreprocessorModule(inputFilename, elementType, amount)
+    nodalCoordinates, loads = runPreprocessorModule(inputFilename, elementType, amount)
     ################
+
+    # SOLVER # 
+    loadVector = buildLoadVector(nodalCoordinates, loads)
+    ##########

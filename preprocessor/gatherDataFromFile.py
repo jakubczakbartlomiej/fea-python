@@ -19,10 +19,10 @@ def showStatistics(elementType, amount):
 def runPreprocessorModule(inputFilename, elementType, amount):
     
     # GLOBAL VARIABLES #
-    materials = np.empty(shape=(amount[0],2))
-    nodalCoordinates = np.empty(shape=(amount[1],2))
-    elements = np.empty(shape=(amount[2],3))
-    loads = np.empty(shape=(amount[3],4), dtype=object)
+    materials = np.zeros(shape=(amount[0],2))
+    nodalCoordinates = np.zeros(shape=(amount[1],2))
+    elements = np.zeros(shape=(amount[2],3))
+    loads = np.zeros(shape=(amount[3],4), dtype=object)
     ####################
 
     checkLine = ""
@@ -50,4 +50,5 @@ def runPreprocessorModule(inputFilename, elementType, amount):
                 loads[int(gatheredProperties[1])-1,2] = str(gatheredProperties[3])
                 loads[int(gatheredProperties[1])-1,3] = float(gatheredProperties[4])
         showStatistics(elementType, amount)
+        return nodalCoordinates, loads
                 

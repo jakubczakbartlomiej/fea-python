@@ -59,10 +59,3 @@ def checkInputFile(inputFilename):
         print("*****************************\n")
         sys.exit("PREPROCESSOR ERROR")
     return elementType, amount
-
-def getCharPosition(givenString, char):
-    position = []
-    for n in range(len(givenString)):
-        if givenString[n] == char:
-            position.append(n)
-    return position
