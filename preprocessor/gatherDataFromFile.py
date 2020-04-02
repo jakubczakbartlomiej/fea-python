@@ -22,6 +22,7 @@ def runPreprocessorModule(inputFilename, elementType, amount):
     materials = np.zeros(shape=(amount[0],2))
     nodalCoordinates = np.zeros(shape=(amount[1],2))
     elements = np.zeros(shape=(amount[2],3))
+    nodesOfElement = np.zeros(shape=(amount[2],3))
     loads = np.zeros(shape=(amount[3],4), dtype=object)
     ####################
 
@@ -43,6 +44,8 @@ def runPreprocessorModule(inputFilename, elementType, amount):
                 elements[int(gatheredProperties[1])-1,0] = int(gatheredProperties[3])
                 elements[int(gatheredProperties[1])-1,1] = int(gatheredProperties[4])
                 elements[int(gatheredProperties[1])-1,2] = int(gatheredProperties[2])
+                nodesOfElement[int(gatheredProperties[1])-1,int(gatheredProperties[2])]
+                nodesOfElement[int(gatheredProperties[1])-1,int(gatheredProperties[3])]
             if("F," in checkLine[:2]):
                 gatheredProperties = checkLine.rsplit(", ")
                 loads[int(gatheredProperties[1])-1,0] = str(gatheredProperties[0])
@@ -50,5 +53,5 @@ def runPreprocessorModule(inputFilename, elementType, amount):
                 loads[int(gatheredProperties[1])-1,2] = str(gatheredProperties[3])
                 loads[int(gatheredProperties[1])-1,3] = float(gatheredProperties[4])
         showStatistics(elementType, amount)
-        return nodalCoordinates, loads
+        return nodalCoordinates, loads, nodesOfElement
                 
