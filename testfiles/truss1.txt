@@ -1,9 +1,9 @@
 # ELEMENT TYPE #
 ET, LINK180
 
-# MATERIALS (MAT, material_id, EX, PRXY) #
-MAT, 1, 1000, 0.3
-MAT, 2, 500, 0.3
+# MATERIALS (MAT, material_id, EX, PRXY, area) #
+MAT, 1, 1000, 0.3, 1
+MAT, 2, 500, 0.3, 1
 
 # NODES (N, id, x-cord, y-cord) #
 N, 1, 0, 0

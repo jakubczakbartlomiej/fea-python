@@ -7,10 +7,10 @@ if __name__ == "__main__":
     # PREPROCESSOR #
     inputFilename = loadInputFile()
     elementType, amount = checkInputFile(inputFilename)
-    nodalCoordinates, loads, nodesOfElement = runPreprocessorModule(inputFilename, elementType, amount)
+    nodalCoordinates, loads, nodesOfElement, materials = runPreprocessorModule(inputFilename, elementType, amount)
     ################
 
     # SOLVER # 
     numberOfNodes, loadVector = buildLoadVector(nodalCoordinates, loads)
-    buildStiffnessMatrix(amount, nodalCoordinates, nodesOfElement)
+    buildStiffnessMatrix(amount, materials,nodalCoordinates, nodesOfElement)
     ##########
