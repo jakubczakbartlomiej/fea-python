@@ -1,12 +1,9 @@
 import numpy as np
-from math import sqrt
 
 def calculateElementStiffnessMatrix(youngModulus, elementArea, elementNodalCoordinates):
     elementStiffnessMatrix = np.zeros(shape=(4,4))
     deltaX = float(elementNodalCoordinates[2]) - float(elementNodalCoordinates[0])
     deltaY = float(elementNodalCoordinates[3]) - float(elementNodalCoordinates[1])
-    #print(elementNodalCoordinates)
-    #print("DeltaX: " + str(deltaX) + "   DeltaY: " + str(deltaY))
     L = (deltaX * deltaX + deltaY * deltaY)**(1/2)
     coefficient = youngModulus * elementArea/(L**(1/3))
     
@@ -35,21 +32,21 @@ def buildStiffnessMatrix(amount, materials, nodalCoordinates, nodesOfElement):
     elementNodalCoordinates = np.zeros(4)
     elementDegreeOfFreedom = np.zeros(2 * numberOfNodes)
     stiffnessMatrix = np.zeros(shape = (2 * numberOfNodes ,2 * numberOfNodes))
-    for i in range(1, numberOfElements):
-        for j in range(1, numberOfNodesInElement):
-            elementNodalCoordinates[2*j-2] = nodalCoordinates[int(nodesOfElement[i-1,j-1]),0]
-            elementNodalCoordinates[2*j-1] = nodalCoordinates[int(nodesOfElement[i-1,j-1]),1]
-            elementDegreeOfFreedom[2*j-2] = 2 * int(nodesOfElement[i-1,j-1]) - 1
-            elementDegreeOfFreedom[2*j-1] = 2 * int(nodesOfElement[i-1,j-1])
-        youngModulus = materials[i-1,0] 
-        elementArea = materials[i-1,2]
-        #print("EX: " + str(youngModulus) + "   Area: " + str(elementArea))
+    for i in range(0, numberOfElements):
+        for j in range(0, numberOfNodesInElement):
+            print("i = " + str(i) + "   j = " + str(j))
+            elementNodalCoordinates[(2*j-1)+1] = nodalCoordinates[int(nodesOfElement[i,j])-1,0]
+            elementNodalCoordinates[(2*j)+1] = nodalCoordinates[int(nodesOfElement[i,j])-1,1]
+            elementDegreeOfFreedom[(2*j-1)+1] = 2 * int(nodesOfElement[i,j]) - 1
+            elementDegreeOfFreedom[(2*j)+1] = 2 * int(nodesOfElement[i,j])
+        youngModulus = materials[int(nodesOfElement[i,2])-1,0] 
+        elementArea = materials[int(nodesOfElement[i,2])-1,2]
         elementStiffnessMatrix = calculateElementStiffnessMatrix(youngModulus, elementArea, elementNodalCoordinates)
-        #print(elementStiffnessMatrix)
-        #print("")
+        print(elementStiffnessMatrix)
+        print("")
         for row in range(0, 2 * numberOfNodesInElement - 1):
             for column in range(0, 2 * numberOfNodesInElement - 1):
                 #print(elementStiffnessMatrix[row,column])
                 stiffnessMatrix[int(elementDegreeOfFreedom[row]), int(elementDegreeOfFreedom[column])] = \
-                    stiffnessMatrix[int(elementDegreeOfFreedom[row]), int(elementDegreeOfFreedom[column])] + elementStiffnessMatrix[row,column]
-    print(stiffnessMatrix) 
+                    stiffnessMatrix[int(elementDegreeOfFreedom[row]), int(elementDegreeOfFreedom[column])] + float(elementStiffnessMatrix[row,column])
+    #print(stiffnessMatrix)
