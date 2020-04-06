@@ -8,11 +8,11 @@ if __name__ == "__main__":
     # PREPROCESSOR #
     inputFilename = loadInputFile()
     elementType, amount = checkInputFile(inputFilename)
-    nodalCoordinates, loads, nodesOfElement, materials = runPreprocessorModule(inputFilename, elementType, amount)
+    nodalCoordinates, loads, supports, nodesOfElement, materials = runPreprocessorModule(inputFilename, elementType, amount)
     ################
 
     # SOLVER # 
     numberOfNodes, loadVector = buildLoadVector(nodalCoordinates, loads)
     stiffnessMatrix = buildStiffnessMatrix(amount, materials,nodalCoordinates, nodesOfElement)
-    loadVector, stiffnessMatrix = imposeBoundaryConditions(amount, loads, loadVector, stiffnessMatrix)
+    loadVector, stiffnessMatrix = imposeBoundaryConditions(amount, supports, loadVector, stiffnessMatrix)
     ##########

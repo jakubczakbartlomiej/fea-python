@@ -10,7 +10,8 @@ def showStatistics(elementType, amount):
     print("NUMBER OF APPLIED MATERIALS: " + str(amount[0]))
     print("NUMBER OF NODES: " + str(amount[1]))
     print("NUMBER OF ELEMENTS: " + str(amount[2]))
-    print("NUMBER OF LOADS: " + str(amount[3]))
+    print("NUMBER OF SUPPORTS: " + str(amount[3]))
+    print("NUMBER OF LOADS: " + str(amount[4]))
     print("******************************************")
     print("\n")
     print("PROCESSING TO SOLVER MODULE...")
@@ -23,7 +24,11 @@ def runPreprocessorModule(inputFilename, elementType, amount):
     nodalCoordinates = np.zeros(shape=(amount[1],2))
     elements = np.zeros(shape=(amount[2],3))
     nodesOfElement = np.zeros(shape=(amount[2],3))
-    loads = np.zeros(shape=(amount[3],4), dtype=object)
+    supports = np.zeros(shape=(amount[3],4), dtype=object)
+    loads = np.zeros(shape=(amount[4],4), dtype=object)
+
+    supportsCounter = 0
+    loadsCounter = 0
     ####################
 
     checkLine = ""
@@ -48,12 +53,20 @@ def runPreprocessorModule(inputFilename, elementType, amount):
                 nodesOfElement[int(gatheredProperties[1])-1,2] = int(gatheredProperties[2])
                 nodesOfElement[int(gatheredProperties[1])-1,0] = int(gatheredProperties[3])
                 nodesOfElement[int(gatheredProperties[1])-1,1] = int(gatheredProperties[4])
-            if("F," in checkLine[:2]):
+            if("D," in checkLine[:2]):
+                supportsCounter += 1
                 gatheredProperties = checkLine.rsplit(", ")
-                loads[int(gatheredProperties[1])-1,0] = str(gatheredProperties[0])
-                loads[int(gatheredProperties[1])-1,1] = int(gatheredProperties[2])
-                loads[int(gatheredProperties[1])-1,2] = str(gatheredProperties[3])
-                loads[int(gatheredProperties[1])-1,3] = float(gatheredProperties[4])
+                supports[supportsCounter-1,0] = str(gatheredProperties[0])
+                supports[supportsCounter-1,1] = int(gatheredProperties[1])
+                supports[supportsCounter-1,2] = str(gatheredProperties[2])
+                supports[supportsCounter-1,3] = float(gatheredProperties[3])
+            if("F," in checkLine[:2]):
+                loadsCounter += 1
+                gatheredProperties = checkLine.rsplit(", ")
+                loads[loadsCounter-1,0] = str(gatheredProperties[0])
+                loads[loadsCounter-1,1] = int(gatheredProperties[1])
+                loads[loadsCounter-1,2] = str(gatheredProperties[2])
+                loads[loadsCounter-1,3] = float(gatheredProperties[3])
         showStatistics(elementType, amount)
-        return nodalCoordinates, loads, nodesOfElement, materials
+        return nodalCoordinates, loads, supports, nodesOfElement, materials
                 

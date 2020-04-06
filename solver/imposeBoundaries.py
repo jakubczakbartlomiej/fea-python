@@ -1,8 +1,8 @@
 import numpy as np
 
-def imposeBoundaryConditions(amount, loads, loadVector, stiffnessMatrix):
+def imposeBoundaryConditions(amount, supports, loadVector, stiffnessMatrix):
     numberOfSupports = amount[3]
     for i in range(0,numberOfSupports):
-        degreeOfFreedom = 2*int(loads[i,0])-2 + int(loads[i,1])
+        degreeOfFreedom = 2*int(supports[i,1])-2 + int(supports[i,2])
         print(degreeOfFreedom)
     return loadVector, stiffnessMatrix

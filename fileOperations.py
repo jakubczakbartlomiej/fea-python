@@ -17,7 +17,7 @@ def checkInputFile(inputFilename):
     print("\n\nOpening "+ inputFilename + "...")
     checkLine = ""
     elementType = ""
-    amount = [0, 0, 0, 0] # amount of [MAT, N, EN, F]
+    amount = [0, 0, 0, 0, 0] # amount of [MAT, N, EN, S, F]
     while(checkLine != ["FINISH"]):
         checkLine = fileToCheck.readline()
         if("LINK180" in checkLine):
@@ -29,8 +29,10 @@ def checkInputFile(inputFilename):
             amount[1] += 1
         if("EN" in checkLine):
             amount[2] += 1
-        if("F" in checkLine):
+        if("D" in checkLine):
             amount[3] += 1
+        if("F" in checkLine):
+            amount[4] += 1
         
     fileToCheck.close()
     if(elementType == ""):
@@ -54,6 +56,11 @@ def checkInputFile(inputFilename):
         print("*****************************\n")
         sys.exit("PREPROCESSOR ERROR")
     if(amount[3] == 0):
+        print("\n***************************")
+        print("ERROR! SUPPORTS ARE NOT FOUND!")
+        print("*****************************\n")
+        sys.exit("PREPROCESSOR ERROR")
+    if(amount[4] == 0):
         print("\n***************************")
         print("ERROR! LOADS ARE NOT FOUND!")
         print("*****************************\n")
