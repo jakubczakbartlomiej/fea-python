@@ -2,6 +2,7 @@ from fileOperations import loadInputFile, checkInputFile
 from preprocessor.gatherDataFromFile import runPreprocessorModule
 from solver.buildLoadVector import buildLoadVector
 from solver.stiffnessLINK180 import buildStiffnessMatrix
+from solver.imposeBoundaries import imposeBoundaryConditions
 
 if __name__ == "__main__":
     # PREPROCESSOR #
@@ -12,5 +13,6 @@ if __name__ == "__main__":
 
     # SOLVER # 
     numberOfNodes, loadVector = buildLoadVector(nodalCoordinates, loads)
-    buildStiffnessMatrix(amount, materials,nodalCoordinates, nodesOfElement)
+    stiffnessMatrix = buildStiffnessMatrix(amount, materials,nodalCoordinates, nodesOfElement)
+    loadVector, stiffnessMatrix = imposeBoundaryConditions(amount, loads, loadVector, stiffnessMatrix)
     ##########
