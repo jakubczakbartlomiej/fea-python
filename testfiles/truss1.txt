@@ -18,10 +18,10 @@ EN, 3, 1, 2, 3
 # SUPPORTS (type, node_id, direction, value) #
 D, 1, UX, 0
 D, 1, UY, 0
-D, 3, UX, 0
+D, 2, UX, 0 
+D, 2, UY, 0
 
 # LOADS (type, node_id, direction, value) #
-F, 3, X, 10
-F, 3, Y, 5
+F, 3, X, 100
 
 FINISH
