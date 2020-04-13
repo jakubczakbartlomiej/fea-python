@@ -22,6 +22,6 @@ D, 2, UX, 0
 D, 2, UY, 0
 
 # LOADS (type, node_id, direction, value) #
-F, 3, X, 100
+F, 3, X, 50
 
 FINISH
