@@ -17,5 +17,4 @@ if __name__ == "__main__":
     stiffnessMatrix = buildStiffnessMatrix(amount, materials,nodalCoordinates, nodesOfElement)
     loadVector, stiffnessMatrix = imposeBoundaryConditions(amount, supports, loadVector, stiffnessMatrix)
     nodalDisplacement = calculateDisplacements(loadVector, stiffnessMatrix)
-    print(nodalDisplacement)
     ##########

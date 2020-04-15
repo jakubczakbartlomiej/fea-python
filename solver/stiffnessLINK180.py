@@ -1,6 +1,7 @@
 import numpy as np
 
 def calculateElementStiffnessMatrix(youngModulus, elementArea, elementNodalCoordinates):
+    #print("EX: " + str(youngModulus))
     elementStiffnessMatrix = np.zeros(shape=(4,4))
     deltaX = float(elementNodalCoordinates[2]) - float(elementNodalCoordinates[0])
     deltaY = float(elementNodalCoordinates[3]) - float(elementNodalCoordinates[1])
@@ -42,9 +43,10 @@ def buildStiffnessMatrix(amount, materials, nodalCoordinates, nodesOfElement):
         youngModulus = materials[int(nodesOfElement[i,2])-1,0] 
         elementArea = materials[int(nodesOfElement[i,2])-1,2]
         elementStiffnessMatrix = calculateElementStiffnessMatrix(youngModulus, elementArea, elementNodalCoordinates)
-        for row in range(0, 2 * numberOfNodesInElement - 1):
-            for column in range(0, 2 * numberOfNodesInElement - 1):
-                stiffnessMatrix[int(elementDegreeOfFreedom[row]), int(elementDegreeOfFreedom[column])] = \
-                    stiffnessMatrix[int(elementDegreeOfFreedom[row]), int(elementDegreeOfFreedom[column])] + float(elementStiffnessMatrix[row,column])
-    print("COMPLITED! SIZE OF THE GLOBAL STIFFNESS MATRIX: " + str(2 * numberOfNodes) + " x " + str(2 * numberOfNodes))
+        for row in range(0, 2 * numberOfNodesInElement):
+            for column in range(0, 2 * numberOfNodesInElement):
+                stiffnessMatrix[int(elementDegreeOfFreedom[row]-1), int(elementDegreeOfFreedom[column])-1] = \
+                    stiffnessMatrix[int(elementDegreeOfFreedom[row]-1), int(elementDegreeOfFreedom[column])-1] + \
+                        float(elementStiffnessMatrix[row,column])
+    print("COMPLETED! SIZE OF THE GLOBAL STIFFNESS MATRIX: " + str(2 * numberOfNodes) + " x " + str(2 * numberOfNodes))
     return stiffnessMatrix

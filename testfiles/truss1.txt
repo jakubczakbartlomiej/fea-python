@@ -2,12 +2,12 @@
 ET, LINK180
 
 # MATERIALS (MAT, material_id, EX, PRXY, area) #
-MAT, 1, 1000, 0.3, 1
-MAT, 2, 500, 0.3, 1
+MAT, 1, 1000, 0.3, 10
+MAT, 2, 500, 0.3, 10
 
 # NODES (N, node_id, x-cord, y-cord) #
 N, 1, 0, 0
-N, 2, 2, 0
+N, 2, 0, 2
 N, 3, 1, 1
 
 # ELEMENTS (EN, element_id, material_id, node_1, node_2, ... , node_n) #
@@ -22,6 +22,6 @@ D, 2, UX, 0
 D, 2, UY, 0
 
 # LOADS (type, node_id, direction, value) #
-F, 3, X, 50
+F, 3, X, 100
 
 FINISH

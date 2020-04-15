@@ -11,7 +11,7 @@ def imposeBoundaryConditions(amount, supports, loadVector, stiffnessMatrix):
             degreeOfFreedom = 2 * int(supports[i,1]) - 2 + 2
         #print(degreeOfFreedom)
         loadVector[degreeOfFreedom-1] = float(supports[i,3])
-        stiffnessMatrix[:,degreeOfFreedom] = 0
-        stiffnessMatrix[degreeOfFreedom,:] = 0
-        stiffnessMatrix[degreeOfFreedom,degreeOfFreedom] = 1
+        stiffnessMatrix[:,degreeOfFreedom-1] = 0
+        stiffnessMatrix[degreeOfFreedom-1,:] = 0
+        stiffnessMatrix[degreeOfFreedom-1,degreeOfFreedom-1] = 1
     return loadVector, stiffnessMatrix
