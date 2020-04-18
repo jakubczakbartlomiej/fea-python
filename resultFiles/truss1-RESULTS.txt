@@ -1,4 +1,4 @@
-Simulation performed at: 18/04/2020 10:43:34
+Simulation performed at: 18/04/2020 21:23:33
 
 ELEMENT TYPE: LINK180
 NUMBER OF APPLIED MATERIALS: 2
@@ -7,7 +7,7 @@ NUMBER OF ELEMENTS: 3
 NUMBER OF SUPPORTS: 4
 NUMBER OF LOADS: 1
 COMPLIANCE: 2.1213203435596433
-CALCULATION TIME: 0.001999378 s
+CALCULATION TIME: 0.000997543 seconds
 
 
 ******************* NODAL DISPLACEMENTS ***********************
@@ -18,19 +18,36 @@ CALCULATION TIME: 0.001999378 s
     3          0.021213203       0.007071068       100.0000000       0.000000000
 
 
+**************** ELEMENT STRESS AND STRAIN ********************
+
+[ELEMENT_ID]          [ELEMENT_STRAIN]              [ELEMENT_STRESS]              [ELEMENT_FORCE]
+     1                  0.000000000                   0.000000000                   0.000000000
+     2                  0.014142136                   7.071067812                   70.71067811
+     3                  0.007071068                   7.071067812                   70.71067811
+
+
 ***************** ELEMENTS AND PROPERTIES *********************
 
-[ELEMENT_ID]          [EX]          [AREA]          [ELEMENT_NODE1]          [ELEMENT_NODE2]
-     1
-     2
-     3
+[ELEMENT_ID]          [EX]             [AREA]          [ELEMENT_NODE1]          [ELEMENT_NODE2]
+     1             1000.000000      10.00000000               1                        2
+     2             500.0000000      10.00000000               1                        3
+     3             1000.000000      10.00000000               2                        3
 
 
 ************************ SUPPORTS *****************************
 
 [SUPPORT_TYPE]          [NODE_ID]          [DIRECTION]          [VALUE]
+       D                    1                  UX                 0.0
+       D                    1                  UY                 0.0
+       D                    2                  UX                 0.0
+       D                    2                  UY                 0.0
 
 
-******************** NODAL COORDINATES *********  ***************
+******************** NODAL COORDINATES ************************
 
 [NODE_ID]          [X-COORDINATE]          [Y-COORDINATE]
+    1                   0.000                  0.000
+    2                   0.000                  2.000
+    3                   1.000                  1.000
+
+FINISH

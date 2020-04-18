@@ -26,11 +26,10 @@ def calculateElementStiffnessMatrix(youngModulus, elementArea, elementNodalCoord
     elementStiffnessMatrix[3,3] = coefficient * deltaY * deltaY
     return elementStiffnessMatrix
 
-def buildStiffnessMatrix(amount, materials, nodalCoordinates, nodesOfElement):
+def buildStiffnessMatrix(amount, materials, nodalCoordinates, nodesOfElement, numberOfNodesInElement):
     print("BUILDING GLOBAL STIFFNESS MATRIX...")
     numberOfNodes = amount[1]
     numberOfElements = amount[2]
-    numberOfNodesInElement = 2
     elementNodalCoordinates = np.zeros(4)
     elementDegreeOfFreedom = np.zeros(2 * numberOfNodesInElement)
     stiffnessMatrix = np.zeros(shape = (2 * numberOfNodes ,2 * numberOfNodes))

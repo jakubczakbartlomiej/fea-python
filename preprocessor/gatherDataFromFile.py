@@ -26,6 +26,7 @@ def runPreprocessorModule(inputFilename, elementType, amount):
     nodesOfElement = np.zeros(shape=(amount[2],3))
     supports = np.zeros(shape=(amount[3],4), dtype=object)
     loads = np.zeros(shape=(amount[4],4), dtype=object)
+    numberOfNodesInElement = 2
 
     supportsCounter = 0
     loadsCounter = 0
@@ -68,5 +69,5 @@ def runPreprocessorModule(inputFilename, elementType, amount):
                 loads[loadsCounter-1,2] = str(gatheredProperties[2])
                 loads[loadsCounter-1,3] = float(gatheredProperties[3])
         showStatistics(elementType, amount)
-        return nodalCoordinates, loads, supports, nodesOfElement, materials
+        return nodalCoordinates, loads, supports, nodesOfElement, materials, elements, numberOfNodesInElement
                 
