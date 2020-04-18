@@ -4,7 +4,7 @@ import numpy as np
 
 def loadInputFile():
     os.system('cls')
-    testFilesList = os.listdir("testfiles")
+    testFilesList = os.listdir("inputFiles")
     i = 1
     for specificFile in testFilesList:
         print(str(i) + ".  " + str(specificFile))
@@ -13,7 +13,7 @@ def loadInputFile():
     return testFilesList[int(userChoice)-1]
 
 def checkInputFile(inputFilename):
-    fileToCheck = open("testfiles/" + inputFilename, 'r')
+    fileToCheck = open("inputFiles/" + inputFilename, 'r')
     print("\n\nOpening "+ inputFilename + "...")
     checkLine = ""
     elementType = ""

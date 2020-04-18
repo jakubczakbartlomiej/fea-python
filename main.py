@@ -4,6 +4,7 @@ from solver.buildLoadVector import buildLoadVector
 from solver.stiffnessLINK180 import buildStiffnessMatrix
 from solver.imposeBoundaries import imposeBoundaryConditions
 from solver.matrixSolver import calculateDisplacements
+from postprocessor.saveResults import writeResultsToFile
 
 if __name__ == "__main__":
     # PREPROCESSOR #
@@ -16,5 +17,8 @@ if __name__ == "__main__":
     numberOfNodes, loadVector = buildLoadVector(nodalCoordinates, loads)
     stiffnessMatrix = buildStiffnessMatrix(amount, materials,nodalCoordinates, nodesOfElement)
     loadVector, stiffnessMatrix = imposeBoundaryConditions(amount, supports, loadVector, stiffnessMatrix)
-    nodalDisplacement = calculateDisplacements(loadVector, stiffnessMatrix)
+    nodalDisplacement, compliance, calculationTime = calculateDisplacements(loadVector, stiffnessMatrix)
     ##########
+
+    # POSTPROCESSOR #
+    writeResultsToFile(inputFilename, elementType, nodalDisplacement, loadVector, compliance, calculationTime, amount)

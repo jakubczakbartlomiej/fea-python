@@ -33,7 +33,7 @@ def runPreprocessorModule(inputFilename, elementType, amount):
 
     checkLine = ""
     if(elementType == "LINK180"): 
-        inputFile = open("testfiles/" + inputFilename, 'r')
+        inputFile = open("inputFiles/" + inputFilename, 'r')
         while(checkLine != "FINISH"):
             checkLine = inputFile.readline()
             if("MAT," in checkLine[:4]):
