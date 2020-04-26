@@ -11,4 +11,4 @@ def buildLoadVector(nodalCoordinates, loads):
         elif loads[i,2] == "Y":
             loadVector[2*loads[i,1]-1] = loads[i,3]
     print("COMPLETED! SIZE OF THE LOAD VECTOR: " + str(numberOfNodes) + "\n")
-    return numberOfNodes, loadVector
+    return loadVector, numberOfNodes

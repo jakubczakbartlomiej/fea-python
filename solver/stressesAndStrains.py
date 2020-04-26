@@ -1,10 +1,10 @@
 import numpy as np 
 
-def findStressAndStrain(amount, nodalDisplacements, nodalCoordinates, nodesOfElement, numberOfNodesInElement, materials):
-    numberOfElements = amount[2]
-    elementStress = np.zeros(amount[2])
-    elementStrain = np.zeros(amount[2])
-    elementForce  = np.zeros(amount[2])
+def findStressAndStrain(nodalCoordinates, nodalDisplacements, materials, nodesOfElement, numberOfNodesInElement, entitiesAmount):
+    numberOfElements = entitiesAmount[2]
+    elementStress = np.zeros(entitiesAmount[2])
+    elementStrain = np.zeros(entitiesAmount[2])
+    elementForce  = np.zeros(entitiesAmount[2])
     elementNodalCoordinates = np.zeros(4)
     elementNodalDisplacement = np.zeros(4)
     elementDegreeOfFreedom = np.zeros(2 * numberOfNodesInElement)

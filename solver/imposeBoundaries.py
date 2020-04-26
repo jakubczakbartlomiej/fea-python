@@ -1,7 +1,7 @@
 import numpy as np
 
-def imposeBoundaryConditions(amount, supports, loadVector, stiffnessMatrix):
-    numberOfSupports = amount[3]
+def imposeBoundaryConditions(loadVector, supports, stiffnessMatrix, entitiesAmount):
+    numberOfSupports = entitiesAmount[3]
     #print(loadVector)
     #print("")
     for i in range(0,numberOfSupports):

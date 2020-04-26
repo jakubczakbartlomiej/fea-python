@@ -1,4 +1,4 @@
-from fileOperations import loadInputFile, checkInputFile
+from preprocessor.fileOperations import loadInputFile, checkInputFile
 from preprocessor.gatherDataFromFile import runPreprocessorModule
 from solver.buildLoadVector import buildLoadVector
 from solver.stiffnessLINK180 import buildStiffnessMatrix
@@ -10,19 +10,19 @@ from postprocessor.saveResults import writeResultsToFile
 if __name__ == "__main__":
     # PREPROCESSOR #
     inputFilename = loadInputFile()
-    elementType, amount = checkInputFile(inputFilename)
-    nodalCoordinates, loads, supports, nodesOfElement, materials, elements, numberOfNodesInElement = runPreprocessorModule(inputFilename, elementType, amount)
+    elementType, entitiesAmount = checkInputFile(inputFilename)
+    nodalCoordinates, materials, elements, loads, supports, nodesOfElement, numberOfNodesInElement = runPreprocessorModule(inputFilename, elementType, entitiesAmount)
     ################
 
     # SOLVER # 
-    numberOfNodes, loadVector = buildLoadVector(nodalCoordinates, loads)
-    stiffnessMatrix = buildStiffnessMatrix(amount, materials, nodalCoordinates, nodesOfElement, numberOfNodesInElement)
-    loadVectorImposed, stiffnessMatrixImposed = imposeBoundaryConditions(amount, supports, loadVector, stiffnessMatrix)
-    nodalDisplacement, compliance, calculationTime = calculateDisplacements(loadVectorImposed, stiffnessMatrixImposed)
-    elementStess, elementStrain, elementForce = findStressAndStrain(amount, nodalDisplacement, nodalCoordinates, \
-        nodesOfElement, numberOfNodesInElement, materials)
+    loadVector, numberOfNodes = buildLoadVector(nodalCoordinates, loads)
+    stiffnessMatrix = buildStiffnessMatrix(nodalCoordinates, materials, nodesOfElement, numberOfNodesInElement, entitiesAmount)
+    loadVectorImposed, stiffnessMatrixImposed = imposeBoundaryConditions(loadVector, supports, stiffnessMatrix, entitiesAmount)
+    nodalDisplacements, compliance, calculationTime = calculateDisplacements(loadVectorImposed, stiffnessMatrixImposed)
+    elementStress, elementStrain, elementForce = findStressAndStrain(nodalCoordinates, nodalDisplacements, \
+        materials, nodesOfElement, numberOfNodesInElement, entitiesAmount)
     ##########
 
     # POSTPROCESSOR #
-    writeResultsToFile(inputFilename, elementType, nodalDisplacement, loadVectorImposed, compliance, \
-        calculationTime, amount, materials, elements, supports, nodalCoordinates, elementStrain, elementStess, elementForce)
+    writeResultsToFile(inputFilename, elementType, nodalCoordinates, nodalDisplacements, materials, elements, \
+        supports, loadVectorImposed, entitiesAmount, elementStrain, elementStress, elementForce, compliance, calculationTime)

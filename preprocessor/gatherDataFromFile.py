@@ -69,5 +69,5 @@ def runPreprocessorModule(inputFilename, elementType, amount):
                 loads[loadsCounter-1,2] = str(gatheredProperties[2])
                 loads[loadsCounter-1,3] = float(gatheredProperties[3])
         showStatistics(elementType, amount)
-        return nodalCoordinates, loads, supports, nodesOfElement, materials, elements, numberOfNodesInElement
+        return nodalCoordinates, materials, elements, loads, supports, nodesOfElement, numberOfNodesInElement 
                 
